@@ -1,0 +1,211 @@
+/* ====================================
+      �^�O�ݒ�
+   ==================================== */
+* {
+	margin: 0;
+	padding: 0;
+}
+
+h1,
+h2 {
+	padding: 20px 0;
+}
+
+h4 {
+	padding: 10px 0;
+}
+
+hr {
+	margin-bottom: 20px;
+}
+
+ul {
+	list-style: none;
+	padding-left: 0px;
+}
+
+li {
+	padding: 5px;
+}
+
+form {
+	margin-bottom: 15px;
+}
+
+input[type="submit"] {
+	padding: 1px 6px;
+}
+
+table {
+	margin: 10px auto 50px auto;
+	text-align: center;
+}
+
+
+/* ====================================
+      ���ʃN���X�ݒ�
+   ==================================== */
+.inline-block {
+	display: inline-block;
+}
+
+
+/* ====================================
+      �y�[�W�S�̐ݒ�
+   ==================================== */
+/* �u���E�U�S�̂̉�ʐݒ� */
+html,
+body {
+	height: 100%;
+	margin: 0;
+}
+
+#wrap {
+	position: relative;
+	min-height: 100%;
+	height: 100%;
+	height: auto !important;
+	margin: auto;
+}
+
+.container {
+	width: 850px;
+	margin: 0 auto;
+}
+
+/* �w�b�_�[ */
+header {
+	padding-top: 10px;
+	border-bottom: 5px solid #0000ff;
+	text-align: center;
+}
+
+/* ���j���[��� */
+#menu {
+	position: relative;
+	border-bottom: 2px solid #0000ff;
+}
+
+/* ���C����� */
+#main {
+	margin: 0 auto;
+	padding-top: 40px;
+	padding-bottom: 250px;
+	text-align: center;
+}
+
+/* �t�b�^�[ */
+footer {
+	position: absolute;
+	width: 100%;
+	height: 120px;
+	bottom: 0px;
+	border-top: 2px solid #0000ff;
+}
+
+/* �i�r�Q�[�V�����o�[ */
+#nav {
+	position: absolute;
+	top: 23px;
+	width: 285px;
+}
+
+#nav li {
+	display: inline-block;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+#navList {
+	position: absolute;
+	top: 5px;
+	width: 285px;
+}
+
+#navList li {
+	display: inline-block;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+/* �y�[�W�^�C�g�� */
+#page_title {
+	text-align: center;
+}
+
+/* ���[�U�[��� */
+#user_info {
+	position: absolute;
+	width: 200px;
+	margin-left: 715px;
+	bottom: 10px;
+	margin-right: 0px;
+
+}
+
+/* ====================================
+      �e�[�u���ݒ�
+   ==================================== */
+/*�e�[�u���̐F�ݒ�*/
+table th {
+	width: 150px;
+	background-color: #9de2ff;
+}
+
+/* �ꗗ��ʗp�e�[�u���̐ݒ� */
+.list-table {
+	width: 100%;
+}
+
+/* �ڍ׏��p�e�[�u���̐ݒ� */
+.detail-table {
+	width: 40%;
+}
+
+.detail-table tr td {
+	background-color: #E0FFFF;
+}
+
+/* ���̓t�H�[���p�e�[�u���̐ݒ� */
+.input-table input[type="text"] {
+	width: 100%;
+}
+
+/* ���v���z�p�e�[�u���̐ݒ� */
+.total-price-table {
+	width: 300px;
+	margin-right: 100px;
+}
+
+
+/* ====================================
+      �{�^���ݒ�
+   ==================================== */
+.buy-button {
+	width: 200px;
+	margin-left: auto;
+}
+
+
+/* ====================================
+      ���j���[��ʐݒ�
+   ==================================== */
+/* ���j���[�����N�̐ݒ� */
+.link li {
+	margin-bottom: 20px;
+}
+
+
+/* ====================================
+      �G���[��ʐݒ�
+   ==================================== */
+/* �G���[���b�Z�[�W�̐ݒ� */
+.error-msg {
+	text-align: center;
+}
+
+/* �G���[��ʃ����N�̐ݒ� */
+.back-link {
+	margin-top: 100px;
+	text-align: center;
+}
