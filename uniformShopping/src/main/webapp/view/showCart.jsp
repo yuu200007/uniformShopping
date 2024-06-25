@@ -16,6 +16,7 @@ MyFormat mf = new MyFormat();
 
 		<!--ヘッダー部分  -->
 		<%@ include file="/common/header.jsp"%>
+		<%@ include file="/common/userInfo.jsp"%>
 
 		<!-- メニュー部分 -->
 		<div id="menu">
@@ -41,6 +42,7 @@ MyFormat mf = new MyFormat();
 					<th>商品名</th>
 					<th>単価</th>
 					<th>個数</th>
+					<th></th>
 				</tr>
 				<%
 				int total = 0;
@@ -51,6 +53,7 @@ MyFormat mf = new MyFormat();
 					<td style="text-align: center"><%=order_list.get(i).getItem_name()%></td>
 					<td style="text-align: center"><%=mf.moneyFormat(order_list.get(i).getPrice())%></td>
 					<td style="text-align: center"><%=order_list.get(i).getQuantity()%></td>
+					<td style="text-align: center"><a href="<%=request.getContextPath()%>/insertIntoCart?delno=<%=i%>">削除</a></td>
 				</tr>
 				<%
 					total += ((order_list.get(i).getPrice())*(order_list.get(i).getQuantity()));
@@ -65,9 +68,11 @@ MyFormat mf = new MyFormat();
 					<td><%= mf.moneyFormat(total) %></td>
 				</tr>
 			</table>
+			<% if (order_list != null) { %>
 			<form action="<%=request.getContextPath()%>/view/orderConfirm.jsp" class="buy-button">
 				<input type="submit" value="注文内容確認">
 			</form>
+			<%} %>
 		</div>
 	</div>
 

@@ -19,6 +19,7 @@ String Sales = (String) request.getAttribute("Sales");
 
 		<!-- ヘッダー部分 -->
 		<%@ include file="/common/header.jsp"%>
+		<%@ include file="/common/userInfo.jsp"%>
 
 		<!-- メニュー部分 -->
 		<div id="menu">

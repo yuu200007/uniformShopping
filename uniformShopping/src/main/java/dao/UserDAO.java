@@ -111,6 +111,63 @@ public class UserDAO {
 	}
 
 	/**
+	 * DBのユーザー情報を格納するuserinfoテーブから、引数として与えられたユーザーIDと一致するユーザー情報を取得する
+	 *
+	 * @param login_id
+	 * @return ユーザー情報のオブジェクト
+	 */
+	public User searchUser(String login_id) {
+
+		Connection con = null;
+		Statement smt = null;
+
+		//Userクラスのオブジェクト生成
+		User user = new User();
+
+		try {
+
+			con = getConnection();
+			smt = con.createStatement();
+
+			//userinfoテーブルから特定のユーザーIDとパスワードを取得するためのSELECT文
+			String sql = "SELECT * FROM userinfo WHERE login_id = '" + login_id + "'";
+
+			//DBからユーザー情報を取得
+			ResultSet rs = smt.executeQuery(sql);
+
+			if (rs.next()) {
+				user.setUser_id(rs.getInt("user_id"));
+				user.setLogin_id(rs.getString("login_id"));
+				user.setPassword(rs.getString("password"));
+				user.setAuthority(rs.getInt("authority"));
+				user.setName(rs.getString("name"));
+				user.setAddress(rs.getString("address"));
+				user.setEmail(rs.getString("email"));
+			}
+
+		} catch (Exception e) {
+			throw new IllegalStateException(e);
+		} finally {
+			if (smt != null) {
+				try {
+					smt.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ignore) {
+				}
+			}
+		}
+
+		//ユーザー情報を呼び出し元に返す
+		return user;
+	}
+
+	
+	/**
 	 * DBの書籍情報を格納するuserinfoテーブルへ書籍情報を登録する
 	 *
 	 * @param user

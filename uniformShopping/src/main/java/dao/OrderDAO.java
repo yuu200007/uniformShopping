@@ -35,12 +35,12 @@ public class OrderDAO {
 		
 		//SQL文
 		String sql = "INSERT INTO orderinfo VALUES(NULL,'"
-				+ order.getBuyer()  + "','"
-				+ order.getItem_id() + "','"
-				+ order.getQuantity() + "','"
-				+ order.getPay_status() + "','"
+				+ order.getBuyer()  + "',"
+				+ order.getItem_id() + ","
+				+ order.getQuantity() + ","
+				+ order.getPay_status() + ","
 				+ order.getDeli_status() 
-				+ "', CURDATE())";		
+				+ ", NOW())";		
 		try {
 			con = getConnection();
 			smt = con.createStatement();
@@ -118,6 +118,37 @@ public class OrderDAO {
 
 		//注文情報更新のSQL文
 		String sql = "UPDATE orderinfo SET pay_status=" + order.getPay_status() + ",deli_status=" + order.getDeli_status() + " WHERE trans_id=" + order.getTrans_id();
+
+		try {
+			con = getConnection(); //データベース接続
+			smt = con.createStatement(); //createStatementのオブジェクト化
+			smt.executeUpdate(sql); //SQL文の発行、入金・発送情報の更新
+
+		} catch (Exception e) {
+			throw new IllegalStateException(e); //エラーメッセージの表示
+		} finally {
+			if (smt != null) {
+				try {
+					smt.close();
+				} catch (SQLException ignore) {//Statementのクローズ
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ignore) { //Connectionのクローズ
+				}
+			}
+		}
+	}
+	
+	public void updateStock(Order order) {
+
+		Connection con = null;
+		Statement smt = null;
+
+		//注文情報更新のSQL文
+		String sql = "UPDATE iteminfo SET stock = stock - "+order.getQuantity()+" WHERE item_id = "+order.getItem_id();
 
 		try {
 			con = getConnection(); //データベース接続

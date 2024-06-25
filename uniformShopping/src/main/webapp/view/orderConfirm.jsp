@@ -4,7 +4,6 @@
 <%@page import="java.util.*,bean.*,dao.*,util.*" %>
 <%@page import="java.util.ArrayList"%>
 <%
-User user = (User)session.getAttribute("user");
 MyFormat format = new MyFormat();
 %>
 <html>
@@ -18,6 +17,7 @@ MyFormat format = new MyFormat();
 
 			<!--ヘッダー部分  -->
 			<%@ include file="/common/header.jsp" %>
+			<%@ include file="/common/userInfo.jsp"%>
 
 			<!-- メニュー部分 -->
 			<div id="menu">
@@ -25,7 +25,7 @@ MyFormat format = new MyFormat();
 					<!-- ナビゲーション  -->
 					<div id="nav">
 						<ul>
-							<li><a href ="<%=request.getContextPath()%>/view/list.jsp">[商品一覧]</a></li>
+							<li><a href ="<%=request.getContextPath()%>/list">[商品一覧]</a></li>
 						</ul>
 					</div>
 
@@ -38,13 +38,13 @@ MyFormat format = new MyFormat();
 
 			<!-- 一覧のコンテンツ部分 -->
 			<div id="main" class="container">
+			<form action="<%=request.getContextPath()%>/orderConfirm">
 			
 			<%
 			//会員だった場合
 			if(user.getAuthority()==2){
 			%>
 				<!--  入力フォーム -->
-				<form action="<%=request.getContextPath()%>/orderConfirm">
 					<table class="input-table" align="center">
 					<tr>
 						<th>氏名</th>
@@ -63,13 +63,11 @@ MyFormat format = new MyFormat();
 						<td><textarea name="remarks" rows="3" cols="45"></textarea></td>
 					</tr>
 					</table>
-				</form>
 			<%
 			//非会員だった場合
 			}else{
 			%>
 			<!--  入力フォーム -->
-				<form action="<%=request.getContextPath()%>/orderConfirm">
 					<table class="input-table" align="center">
 					<tr>
 						<th>氏名</th>
@@ -88,7 +86,6 @@ MyFormat format = new MyFormat();
 						<td><textarea name="remarks" rows="3" cols="45"></textarea></td>
 					</tr>
 					</table>
-				</form>
 			<%
 			}
 			%>
@@ -130,7 +127,6 @@ MyFormat format = new MyFormat();
 					</tr>
 				</table>
 
-				<form action="<%=request.getContextPath()%>/orderConfirm" class="buy-button">
 					<input type="submit" value=" 購入 ">
 				</form>
 

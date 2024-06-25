@@ -49,7 +49,7 @@ public class DeleteServlet extends HttpServlet {
 
 		} catch (IllegalStateException e) {
 			error = "DB接続エラーの為、商品削除処理は行えませんでした。";
-			cmd = "logout";
+			cmd = "list";
 
 		} finally {
 

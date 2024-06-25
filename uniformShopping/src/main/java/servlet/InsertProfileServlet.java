@@ -31,29 +31,38 @@ public class InsertProfileServlet extends HttpServlet {
 			String name = request.getParameter("name");
 			String address = request.getParameter("address");
 			String email = request.getParameter("Email");
+			
+			//UserDAOオブジェクトの生成
+			UserDAO userDao = new UserDAO();
 
 			//未入力エラー
 			if (password.equals("")) {
 				error = "パスワードが未入力の為、会員情報登録処理を行うことができませんでした。";
-				cmd = "change";
+				cmd = "insertProfile";
 				return;
 			}
 
 			if (name.equals("")) {
 				error = "名前が未入力の為、会員情報登録処理を行うことができませんでした。";
-				cmd = "change";
+				cmd = "insertProfile";
 				return;
 			}
 
 			if (address.equals("")) {
 				error = "住所が未入力の為、会員情報登録処理を行うことができませんでした。";
-				cmd = "change";
+				cmd = "insertProfile";
 				return;
 			}
 
 			if (email.equals("")) {
 				error = "メールアドレスが未入力の為、会員情報登録処理を行うことができませんでした。";
-				cmd = "change";
+				cmd = "insertProfile";
+				return;
+			}
+			
+			if (userDao.searchUser(login_id) != null) { 
+				error = "ログインIDが既に存在する為、会員情報登録処理を行うことができませんでした。";
+				cmd = "insertProfile";
 				return;
 			}
 

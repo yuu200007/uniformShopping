@@ -46,8 +46,8 @@ public class ChangeStatusServlet extends HttpServlet {
             }
 
         } catch (Exception e) { //DB未接続エラー
-            error = "DB接続エラーの為、商品更新処理は行えませんでした。";
-            cmd = "logout";
+            error = "DB接続エラーの為、状況更新処理は行えませんでした。";
+            cmd = "orderedList";
 
         } finally { //遷移先の指定
             if (error == null) {

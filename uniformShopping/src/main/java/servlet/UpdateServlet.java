@@ -3,6 +3,8 @@ package servlet;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
@@ -26,7 +28,7 @@ public class UpdateServlet extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 		String error = null; //エラーメッセージ	格納変数
-		String cmd = "list"; //画面遷移の場所情報
+		String cmd = "update"; //画面遷移の場所情報
 
 		try {
 
@@ -41,6 +43,13 @@ public class UpdateServlet extends HttpServlet {
 			//商品詳細情報取得
 			Item oldItem = itemDao.selectByItemId(itemId);
 
+			//商品IDが存在しない
+			if (oldItem == null) {
+				error = "変更対象の商品が存在しない為、変更画面は表示できませんでした。";
+				cmd = "list";
+				return;
+			}
+			
 			//商品詳細・更新画面に遷移する場合finallyに移る
 			if (cmd.equals("update_view")) {
 				request.setAttribute("item_info", oldItem);
@@ -52,27 +61,36 @@ public class UpdateServlet extends HttpServlet {
 			String stock = request.getParameter("stock");
 			Part filePart = request.getPart("image");
 
+
 			//商品名未入力エラー
 			if (itemName.equals("")) {
-				error = "商品名が未入力の為、商品登録処理は行えませんでした。";
-				return;
-			}
-			//価格未入力エラー
-			if (price.equals("")) {
-				error = "価格が未入力の為、商品登録処理は行えませんでした。";
-				return;
-			}
-			//在庫数未入力エラー
-			if (price.equals("")) {
-				error = "在庫数が未入力の為、商品登録処理は行えませんでした。";
+				error = "商品名が未入力の為、商品更新処理は行えませんでした。";
+				cmd = "list";
 				return;
 			}
 
-			//画像データの削除
-			String oldImage = itemDao.selectByItemId(itemId).getImage();
-			if (!(oldImage.equals("No_image.jpg"))) {
-				Path delFile = new File(getServletContext().getRealPath("/img/") + oldImage).toPath();
-				Files.delete(delFile);
+			//価格未入力エラー
+			if (price.equals("")) {
+				error = "価格が未入力の為、商品更新処理は行えませんでした。";
+				cmd = "list";
+				return;
+			}
+
+			//在庫数未入力エラー
+			if (stock.equals("")) {
+				error = "在庫数が未入力の為、商品更新処理は行えませんでした。";
+				cmd = "list";
+				return;
+			}
+
+			//価格値不正エラー
+			if (Integer.parseInt(price) < 0) {
+				error = "価格が不正のため、商品更新処理は行えませんでした。";
+				cmd = "list";
+				request.setAttribute("error", error);
+				request.setAttribute("cmd", cmd);
+				request.getRequestDispatcher("/view/error.jsp").forward(request, response);
+				return;
 			}
 
 			//パラメータからファイル名抽出
@@ -86,7 +104,7 @@ public class UpdateServlet extends HttpServlet {
 			if (matcher.find()) {
 				fileName = matcher.group(1);
 				if (fileName == "") {
-					error = "画像が未セットの為、商品登録処理は行えませんでした。";
+					error = "画像が未セットの為、商品更新処理は行えませんでした。";
 					cmd = "list";
 					return;
 				}
@@ -97,7 +115,7 @@ public class UpdateServlet extends HttpServlet {
 				//画像ファイル存在確認
 				int random;
 				while (filePath.exists()) {
-					random = (int)(Math.random() * 999);
+					random = (int) (Math.random() * 999);
 					fileName = random + fileName;
 					filePath = new File(
 							getServletContext().getRealPath("/img/") + fileName);
@@ -111,6 +129,11 @@ public class UpdateServlet extends HttpServlet {
 				}
 
 			}
+
+			//画像データの削除
+			String oldImage = itemDao.selectByItemId(itemId).getImage();
+			Path delFile = new File(getServletContext().getRealPath("/img/") + oldImage).toPath();
+			Files.delete(delFile);
 
 			//Item型に変換
 			item.setItemId(itemId);
@@ -127,14 +150,19 @@ public class UpdateServlet extends HttpServlet {
 
 		} catch (Exception e) { //DB未接続エラー
 			error = "DB接続エラーの為、商品更新処理は行えませんでした。";
-			cmd = "logout";
+			cmd = "orderedList";
+			StringWriter sw = new StringWriter();
+			PrintWriter pw = new PrintWriter(sw);
+			e.printStackTrace(pw);
+			pw.flush();
+			error = sw.toString();
 
 		} finally { //遷移先の指定
 			if ((error == null) && (cmd.equals("update_view"))) {
 				request.getRequestDispatcher("/view/update.jsp").forward(request, response); //商品詳細・更新画面に遷移
 			} else if ((error == null) && (cmd.equals("update"))) {
 				response.sendRedirect(request.getContextPath() + "/list"); //商品一覧に遷移
-				
+
 			} else {
 				request.setAttribute("error", error); //エラーメッセージのセット
 				request.setAttribute("cmd", cmd); //エラー画面からの遷移先のセット

@@ -29,7 +29,7 @@ public class ShowHistoryOrderedItemServlet extends HttpServlet{
 			
 			//セッション切れの場合はエラー文の表示
 			if(user == null) {
-				error = "セッション切れの為、注文履歴は確認できません。";
+				error = "セッション切れの為、注文履歴は表示できません。";
 				cmd = "list";
 			}
 			
@@ -48,7 +48,7 @@ public class ShowHistoryOrderedItemServlet extends HttpServlet{
 			request.setAttribute("orderItemList", orderItemList);
 			
 		}catch(IllegalStateException e) {
-			error = "DB接続エラーの為、注文履歴表示は行えませんでした。";
+			error = "DB接続エラーの為、注文履歴は表示できません。";
 			cmd = "list";
 			
 		}finally {

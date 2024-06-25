@@ -47,7 +47,7 @@ public class LoginServlet extends HttpServlet {
 			}
 
 			//ユーザー情報がある場合
-			if (user.getLogin_id() != null) {
+			if ((user.getLogin_id() != null) || (!(user.getLogin_id().equals("user0")))) {
 
 				//取得したユーザーオブジェクトセッションにスコープにuserという名前で登録する
 				HttpSession session = request.getSession();

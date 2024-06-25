@@ -4,6 +4,7 @@
 <%@page import="java.util.*,bean.*,dao.*,util.*"%>
 <%
 ArrayList<OrderItem> orderItemList = (ArrayList<OrderItem>)request.getAttribute("orderItemList");
+MyFormat mf = new MyFormat();
 %>
 <html>
 <head>
@@ -16,6 +17,7 @@ ArrayList<OrderItem> orderItemList = (ArrayList<OrderItem>)request.getAttribute(
 	<div id="wrap">
 		<!-- ヘッダー部分 -->
 		<%@ include file="/common/header.jsp"%>
+		<%@ include file="/common/userInfo.jsp"%>
 
 		<!-- メニュー部分 -->
 		<div id="menu">
@@ -53,9 +55,9 @@ ArrayList<OrderItem> orderItemList = (ArrayList<OrderItem>)request.getAttribute(
 					%>
 							<tr>
 								<td><%=orderItemList.get(i).getItem_name()%></td>
-								<td><%=orderItemList.get(i).getPrice()%></td>
+								<td><%=mf.moneyFormat(orderItemList.get(i).getPrice())%></td>
 								<td><%=orderItemList.get(i).getQuantity()%></td>
-								<td><%=total%></td>
+								<td><%=mf.moneyFormat(total)%></td>
 								<td><%=orderItemList.get(i).getPur_date().replace("-","/") %></td>
 							</tr>
 					<%

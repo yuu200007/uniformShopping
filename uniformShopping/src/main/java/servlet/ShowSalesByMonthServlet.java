@@ -20,35 +20,45 @@ public class ShowSalesByMonthServlet extends HttpServlet {
         String error = "";
         String cmd = "";
 
+        //検索情報を取得
+        request.setCharacterEncoding("UTF-8");
+        String year = request.getParameter("year");
+        String month = request.getParameter("month");
+
+        //格納用変数
+        String Sales = "売上がありません。";
+        ArrayList<OrderItem> orderedList = new ArrayList<OrderItem>();
+
         try {
-            //検索情報を取得
-            request.setCharacterEncoding("UTF-8");
-            String year = request.getParameter("year");
-            String month = request.getParameter("month");
+            OrderItemDAO orderItemDAO = new OrderItemDAO();
+
+            //未入力確認
+            if (year.equals("") || month.equals("")) {
+                return;
+            }
 
             //売上げ検索結果をリクエストスコープに格納する
-            OrderItemDAO orderItemDAO = new OrderItemDAO();
-            ArrayList<OrderItem> orderedList = orderItemDAO.selectBySales(year, month);
-            request.setAttribute("orderedList", orderedList);
+            orderedList = orderItemDAO.selectBySales(year, month);
+
+            //検索月の売上有無判定
+            if (orderItemDAO.selectByTotalPrice(year, month) == 0) {
+                return;
+            }
 
             //検索月の売上をリクエストスコープに格納
             MyFormat mf = new MyFormat();
-            String Sales = year + "年 " + month + "月売上 "
-                    + mf.moneyFormat(orderItemDAO.selectByTotalPrice(year, month));
+            Sales = year + "年 " + month + "月売上 " + mf.moneyFormat(orderItemDAO.selectByTotalPrice(year, month));
 
-            //検索月の売上判定
-            if (orderItemDAO.selectByTotalPrice(year, month) == 0 || Sales == null) {
-                Sales = "売上がありません。";
-            }
-
-            request.setAttribute("Sales", Sales);
         } catch (IllegalStateException e) {
-            error = "DB接続エラーの為、購入情報一覧は表示出来ません。";
-            cmd = "login";
+            error = "DB接続エラーの為、検索結果は表示出来ません。";
+            cmd = "orderedList";
         } finally {
             // � エラーの有無でフォワード先を呼び分ける
             if (error.equals("")) {
-                // エラーが無い場合はshowOrderedItem.jspにフォワードする
+                request.setAttribute("Sales", Sales);
+                request.setAttribute("orderedList", orderedList);
+
+                // showOrderedItem.jspにフォワードする
                 request.getRequestDispatcher("/view/orderedList.jsp")
                         .forward(request, response);
             } else {

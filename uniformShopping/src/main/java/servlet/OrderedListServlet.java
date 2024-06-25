@@ -48,8 +48,8 @@ public class OrderedListServlet extends HttpServlet {
             request.setAttribute("Sales", Sales);
 
         } catch (IllegalStateException e) {
-            error = "DB接続エラーの為、購入情報一覧は表示出来ません。";
-            cmd = "login";
+            error = "DB接続エラーの為、受注状況一覧は表示出来ません。";
+            cmd = "orderedList";
         } finally {
             // � エラーの有無でフォワード先を呼び分ける
             if (error.equals("")) {

@@ -47,17 +47,37 @@ public class InsertServlet extends HttpServlet {
 			// 全データの空白チェック（データが入力されているかどうか）
 			if (itemName.equals("")) {
 				error = "商品名が未入力の為、商品登録処理は行えませんでした。";
-				cmd = "list";
+				cmd = "insert";
 				return;
 			}
 			if (strPrice.equals("")) {
 				error = "価格が未入力の為、商品登録処理は行えませんでした。";
-				cmd = "list";
+				cmd = "insert";
 				return;
 			}
 			if (strStock.equals("")) {
 				error = "在庫数が未入力の為、商品登録処理は行えませんでした。";
-				cmd = "list";
+				cmd = "insert";
+				return;
+			}
+
+			//価格値不正エラー
+			if (Integer.parseInt(strPrice) < 0) {
+				error = "価格が不正のため、商品登録処理は行えませんでした。";
+				cmd = "insert";
+				request.setAttribute("error", error);
+				request.setAttribute("cmd", cmd);
+				request.getRequestDispatcher("/view/error.jsp").forward(request, response);
+				return;
+			}
+
+			//在庫数値不正エラー
+			if (Integer.parseInt(strStock) <= 0) {
+				error = "在庫数が不正のため、商品登録処理は行えませんでした。";
+				cmd = "insert";
+				request.setAttribute("error", error);
+				request.setAttribute("cmd", cmd);
+				request.getRequestDispatcher("/view/error.jsp").forward(request, response);
 				return;
 			}
 
@@ -71,7 +91,7 @@ public class InsertServlet extends HttpServlet {
 
 			} catch (NumberFormatException e) {
 				error = "価格の値が不正の為、商品登録処理は行えませんでした。";
-				cmd = "list";
+				cmd = "insert";
 				return;
 			}
 
@@ -81,7 +101,7 @@ public class InsertServlet extends HttpServlet {
 
 			} catch (NumberFormatException e) {
 				error = "在庫数の値が不正の為、商品登録処理は行えませんでした。";
-				cmd = "list";
+				cmd = "insert";
 				return;
 			}
 
@@ -100,7 +120,7 @@ public class InsertServlet extends HttpServlet {
 				fileName = matcher.group(1);
 				if (fileName == "") {
 					error = "画像が未セットの為、商品登録処理は行えませんでした。";
-					cmd = "list";
+					cmd = "insert";
 					return;
 				}
 
@@ -110,7 +130,7 @@ public class InsertServlet extends HttpServlet {
 				//画像ファイル存在確認
 				int random;
 				while (filePath.exists()) {
-					random = (int)(Math.random() * 999);
+					random = (int) (Math.random() * 999);
 					fileName = random + fileName;
 					filePath = new File(
 							getServletContext().getRealPath("/img/") + fileName);
@@ -139,7 +159,7 @@ public class InsertServlet extends HttpServlet {
 
 		} catch (IllegalStateException e) {
 			error = "DB接続エラーの為、書籍登録処理は行えませんでした。";
-			cmd = "logout";
+			cmd = "orderedList";
 
 		} finally {
 

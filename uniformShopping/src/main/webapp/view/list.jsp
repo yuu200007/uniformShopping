@@ -7,7 +7,6 @@
 <%
 ArrayList<Item> itemList = (ArrayList<Item>) request.getAttribute("item_list");
 MyFormat MyFormatObj = new MyFormat();
-User user = (User) session.getAttribute("user");
 %>
 
 <html>
@@ -23,6 +22,7 @@ User user = (User) session.getAttribute("user");
 
 		<!--ヘッダー部分  -->
 		<%@ include file="/common/header.jsp"%>
+		<%@ include file="/common/userInfo.jsp"%>
 
 		<!-- メニュー部分 -->
 		<div id="menu">
@@ -31,7 +31,7 @@ User user = (User) session.getAttribute("user");
 				<div id="navList">
 					<ul>
 						<%
-						if (user == null) {
+						if (user.getLogin_id().equals("user0")) {
 						%>
 						<li><a href="<%=request.getContextPath()%>/view/login.jsp">[ログイン]</a></li>
 						<li><a
@@ -41,6 +41,7 @@ User user = (User) session.getAttribute("user");
 						} else if ((user != null) && (user.getAuthority() == 1)) {
 						%>
 						<li><a href="<%=request.getContextPath()%>/logout">[ログアウト]</a></li>
+						<li><a href="<%=request.getContextPath()%>/orderedList">[受注状況一覧]</a></li>
 						<li><a href="<%=request.getContextPath()%>/view/insert.jsp">[商品登録]</a></li>
 						<%
 						} else {
@@ -87,8 +88,18 @@ User user = (User) session.getAttribute("user");
 						<td><%=itemList.get(i).getItemName()%></td>
 						<td><img
 							src="<%=request.getContextPath()%>/img/<%=itemList.get(i).getImage()%>"
-							alt="<%=itemList.get(i).getItemId()%>の書籍画像"></td>
+							alt="<%=itemList.get(i).getItemId()%>の画像"></td>
+						<%
+						if (itemList.get(i).getStock() == 0) {
+						%>
+						<td>売り切れ</td>
+						<%
+						} else {
+						%>
 						<td><%=itemList.get(i).getStock()%></td>
+						<%
+						}
+						%>
 						<td><%=MyFormatObj.moneyFormat(itemList.get(i).getPrice())%></td>
 
 						<%
@@ -110,7 +121,7 @@ User user = (User) session.getAttribute("user");
 							</form> </a>
 						</td>
 						<%
-						} else {
+						} else if (itemList.get(i).getStock() != 0) {
 						%>
 						<form class="input_list"
 							action="<%=request.getContextPath()%>/insertIntoCart">

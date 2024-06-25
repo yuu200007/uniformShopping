@@ -40,25 +40,25 @@ public class ChangeProfileServlet extends HttpServlet {
 			//未入力エラー
 			if (password.equals("")) {
 				error = "パスワードが未入力の為、会員情報更新処理を行うことができませんでした。";
-				cmd = "change";
+				cmd = "list";
 				return;
 			}
 
 			if (name.equals("")) {
 				error = "名前が未入力の為、会員情報更新処理を行うことができませんでした。";
-				cmd = "change";
+				cmd = "list";
 				return;
 			}
 
 			if (address.equals("")) {
 				error = "住所が未入力の為、会員情報更新処理を行うことができませんでした。";
-				cmd = "change";
+				cmd = "list";
 				return;
 			}
 
 			if (Email.equals("")) {
 				error = "メールアドレスが未入力の為、会員情報更新処理を行うことができませんでした。";
-				cmd = "change";
+				cmd = "list";
 				return;
 			}
 
@@ -79,7 +79,7 @@ public class ChangeProfileServlet extends HttpServlet {
 
 		} catch (IllegalStateException e) {
 			error = "DB接続エラーの為、会員情報の更新は行えませんでした。";
-			cmd = "logout";
+			cmd = "list";
 		} finally {
 			if (cmd.equals("")) {
 				response.sendRedirect(request.getContextPath() + "/list");

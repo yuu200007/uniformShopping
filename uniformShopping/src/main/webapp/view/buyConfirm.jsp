@@ -6,9 +6,6 @@
 <% 
 ArrayList<Order> order_list = (ArrayList<Order>)request.getAttribute("_order_list");
 MyFormat format = new MyFormat();
-
-//セッションからユーザー情報を取得する
-User user = (User)session.getAttribute("user");
 %>
 
 <html>
@@ -22,6 +19,7 @@ User user = (User)session.getAttribute("user");
 
 			<!-- ヘッダー部分 -->
 			<%@ include file="/common/header.jsp" %>
+			<%@ include file="/common/userInfo.jsp"%>
 
 			<!-- メニュー部分 -->
 			<div id="menu">

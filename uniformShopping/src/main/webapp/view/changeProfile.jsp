@@ -1,8 +1,6 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@page import="java.util.*,bean.*,dao.*" %>
-<%
-User user = (User) session.getAttribute("user");
-%>
+
 <html>
 	<head>
 		<title>会員情報変更</title>
@@ -13,6 +11,7 @@ User user = (User) session.getAttribute("user");
 		<div id="wrap">
 			<!-- ヘッダー部分 -->
 			<%@ include file="/common/header.jsp" %>
+			<%@ include file="/common/userInfo.jsp"%>
 
 			<!-- メニュー部分 -->
 			<div id="menu">

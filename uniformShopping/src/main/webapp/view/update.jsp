@@ -19,6 +19,7 @@ MyFormat MyFormatObj = new MyFormat();
 	<div id="wrap">
 		<!-- ヘッダー部分 -->
 		<%@ include file="/common/header.jsp"%>
+		<%@ include file="/common/userInfo.jsp"%>
 
 		<!-- メニュー部分 -->
 		<div id="menu">

@@ -7,12 +7,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import bean.Item;
+import bean.User;
 import dao.ItemDAO;
+import dao.UserDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/list")
 public class ListServlet extends HttpServlet {
@@ -20,7 +23,7 @@ public class ListServlet extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 		String error = null; //エラーメッセージ	格納変数
-		String cmd = "logout"; //画面遷移の場所情報
+		String cmd = "list"; //画面遷移の場所情報
 
 		try {
 
@@ -29,6 +32,14 @@ public class ListServlet extends HttpServlet {
 
 			//リクエストスコープに登録
 			request.setAttribute("item_list", list);
+
+			HttpSession session = request.getSession();
+			User user = (User) session.getAttribute("user");
+			UserDAO userDao = new UserDAO();
+			if (user == null) {
+				user = userDao.selectByUser("user0", "user0");
+				session.setAttribute("user", user);
+			}
 
 		} catch (Exception e) { //DB未接続エラー
 			error = "DB接続エラーの為、一覧表示は行えませんでした。";

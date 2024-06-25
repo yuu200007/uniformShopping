@@ -1,5 +1,23 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 
+<%
+String user = ""; //ユーザーID変数
+String pass = ""; //パスワード変数
+
+Cookie[] userCookie = request.getCookies(); //クッキーの取得
+
+// クッキーの有無
+if(userCookie != null){
+	for(int i = 0 ; i < userCookie.length; i++){
+		if(userCookie[i].getName().equals("login_id")){ //ユーザーID取得
+			user = userCookie[i].getValue();
+		}
+		if(userCookie[i].getName().equals("password")){ //パスワード取得
+			pass = userCookie[i].getValue();
+		}
+	}
+}
+%>
 <html>
 	<head>
 		<title>ログイン画面</title>
@@ -37,13 +55,13 @@
 						<tr>
 							<th>ユーザー</th>
 							<td>
-								<input type="text" size="25" name="id" value="">
+								<input type="text" size="25" name="id" value="<%= user %>">
 							</td>
 						</tr>
 						<tr>
 							<th>パスワード</th>
 							<td>
-								<input type="password" size="25" name="password" value="">
+								<input type="password" size="25" name="password" value="<%= pass %>">
 							</td>
 						</tr>
 					</table>

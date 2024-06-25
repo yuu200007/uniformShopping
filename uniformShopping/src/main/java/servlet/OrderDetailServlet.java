@@ -36,8 +36,8 @@ public class OrderDetailServlet extends HttpServlet {
 
             // 詳細情報のエラーチェック
             if (orderedList == null) {
-                error = "表示対象の商品が存在しない為、詳細情報は表示出来ませんでした。";
-                cmd = "list";
+                error = "表示対象の商品が存在しない為、受注詳細は表示できませんでした。";
+                cmd = "orderedList";
             }
 
             // 取得したorderedListをリクエストスコープに"orderedList"という名前で格納する
@@ -45,7 +45,7 @@ public class OrderDetailServlet extends HttpServlet {
 
         } catch (IllegalStateException e) {
             error = "DB接続エラーの為、受注詳細は表示できませんでした。";
-            cmd = "menu";
+            cmd = "orderedList";
 
         } finally {
             if (cmd.equals("")) {

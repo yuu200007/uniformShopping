@@ -20,6 +20,7 @@ ArrayList<OrderItem> orderedList = (ArrayList<OrderItem>) request.getAttribute("
 
 		<!-- ヘッダー部分 -->
 		<%@ include file="/common/header.jsp"%>
+		<%@ include file="/common/userInfo.jsp"%>
 
 		<!-- メニュー部分 -->
 		<div id="menu">
@@ -27,7 +28,8 @@ ArrayList<OrderItem> orderedList = (ArrayList<OrderItem>) request.getAttribute("
 				<!-- ナビゲーション  -->
 				<div id="nav">
 					<ul>
-						<li><a href="<%=request.getContextPath()%>/view/list.jsp">[商品一覧]</a></li>
+						<li><a href="<%=request.getContextPath()%>/orderedList">[受注状況一覧]</a></li>
+						<li><a href="<%=request.getContextPath()%>/list">[商品一覧]</a></li>
 					</ul>
 				</div>
 
@@ -60,7 +62,7 @@ ArrayList<OrderItem> orderedList = (ArrayList<OrderItem>) request.getAttribute("
 							<%
 							int totalPrice = 0;
 							for (OrderItem orderItem : orderedList) {
-							    totalPrice += orderItem.getPrice() * orderItem.getQuantity();
+								totalPrice += orderItem.getPrice() * orderItem.getQuantity();
 							}
 							%> <%=mf.moneyFormat(totalPrice)%>
 						</td>
@@ -78,7 +80,9 @@ ArrayList<OrderItem> orderedList = (ArrayList<OrderItem>) request.getAttribute("
 								%>
 								<option value="1">入金待ち</option>
 								<option value="2">入金済</option>
-								<%} %>
+								<%
+								}
+								%>
 						</select></td>
 					</tr>
 					<tr>
@@ -102,7 +106,9 @@ ArrayList<OrderItem> orderedList = (ArrayList<OrderItem>) request.getAttribute("
 								<option value="1">未発送</option>
 								<option value="2">発送準備中</option>
 								<option value="3">発送済</option>
-								<%} %>
+								<%
+								}
+								%>
 						</select></td>
 					</tr>
 					<tr>
@@ -129,8 +135,9 @@ ArrayList<OrderItem> orderedList = (ArrayList<OrderItem>) request.getAttribute("
 					<input type="hidden" name="name">
 					<td><img
 						src="<%=request.getContextPath()%>/img/<%=orderItem.getImage()%>"
-							alt="
-						<%=orderItem.getItem_name()%>" width="176" height="159"></td>
+						alt="
+						<%=orderItem.getItem_name()%>" width="176"
+						height="159"></td>
 				</tr>
 				<tr>
 					<th>個数</th>
