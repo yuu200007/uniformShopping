@@ -3,10 +3,9 @@ package servlet;
 //注文詳細を表示するためのサーブレット
 
 import java.io.IOException;
-import java.util.ArrayList;
 
-import bean.OrderItem;
 import dao.OrderItemDAO;
+import dao.UserDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -23,26 +22,19 @@ public class OrderDetailServlet extends HttpServlet {
         String cmd = "";
 
         try {
-
-            //OrderItemクラスをインスタンス化
             OrderItemDAO orderItemDao = new OrderItemDAO();
+            UserDAO userDao = new UserDAO();
 
             // 購入者と購入日時を取得
             String buyer = request.getParameter("buyer");
             String purDate = request.getParameter("purDate");
 
-            // 商品情報一覧を取得
-            ArrayList<OrderItem> orderedList = orderItemDao.selectByBuyerAndDate(buyer, purDate);
+            // 購入者と購入日時に基づいた商品情報一覧をリクエストスコープ登録
+            request.setAttribute("orderedList", orderItemDao.selectByBuyerAndDate(buyer, purDate));
 
-            // 詳細情報のエラーチェック
-            if (orderedList == null) {
-                error = "表示対象の商品が存在しない為、受注詳細は表示できませんでした。";
-                cmd = "orderedList";
-            }
-
-            // 取得したorderedListをリクエストスコープに"orderedList"という名前で格納する
-            request.setAttribute("orderedList", orderedList);
-
+            // 購入者の情報をリクエストスコープ登録
+            request.setAttribute("buyer", userDao.searchUser(buyer));
+            
         } catch (IllegalStateException e) {
             error = "DB接続エラーの為、受注詳細は表示できませんでした。";
             cmd = "orderedList";

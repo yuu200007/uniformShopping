@@ -6,6 +6,7 @@
 <%
 MyFormat mf = new MyFormat();
 ArrayList<OrderItem> orderedList = (ArrayList<OrderItem>) request.getAttribute("orderedList");
+User buyer = (User) request.getAttribute("buyer");
 %>
 
 <html>
@@ -49,7 +50,19 @@ ArrayList<OrderItem> orderedList = (ArrayList<OrderItem>) request.getAttribute("
 				<table class="input-table" align="center">
 					<tr>
 						<th>ユーザー名</th>
-						<td><%=orderedList.get(0).getBuyer()%></td>
+						<td><%=buyer.getLogin_id()%></td>
+					</tr>
+					<tr>
+						<th>本名</th>
+						<td><%=buyer.getName()%></td>
+					</tr>
+					<tr>
+						<th>住所</th>
+						<td><%=buyer.getAddress()%></td>
+					</tr>
+					<tr>
+						<th>メールアドレス</th>
+						<td><%=buyer.getEmail()%></td>
 					</tr>
 					<tr>
 						<th>発注日</th>
@@ -62,7 +75,7 @@ ArrayList<OrderItem> orderedList = (ArrayList<OrderItem>) request.getAttribute("
 							<%
 							int totalPrice = 0;
 							for (OrderItem orderItem : orderedList) {
-								totalPrice += orderItem.getPrice() * orderItem.getQuantity();
+							    totalPrice += orderItem.getPrice() * orderItem.getQuantity();
 							}
 							%> <%=mf.moneyFormat(totalPrice)%>
 						</td>

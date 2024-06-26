@@ -397,5 +397,54 @@ public class OrderItemDAO {
 		}
 		return OrderItemList;
 	}
+	
+	public ArrayList<OrderItem> selectByDate(String buyer, String pur_date) {
+
+		Connection con = null;
+		Statement smt = null;
+
+		//return用オブジェクトの生成
+		ArrayList<OrderItem> OrderItemList = new ArrayList<OrderItem>();
+
+		//SQL文
+		String sql = "SELECT o.buyer , i.item_name , i.price , o.quantity, o.pur_date FROM iteminfo i, orderinfo o"
+				+ " WHERE i.item_id = o.item_id and o.buyer = '"+buyer+"' and o.pur_date = '"+pur_date+"'";
+
+		try {
+			con = getConnection();
+			smt = con.createStatement();
+
+			//SQLをDBへ発行
+			ResultSet rs = smt.executeQuery(sql);
+
+			//検索結果を配列に格納
+			while (rs.next()) {
+				OrderItem ordereditem = new OrderItem();
+				ordereditem.setBuyer(rs.getString("buyer"));
+				ordereditem.setItem_name(rs.getString("item_name"));
+				ordereditem.setPrice(rs.getInt("price"));
+				ordereditem.setQuantity(rs.getInt("quantity"));
+				ordereditem.setPur_date(rs.getString("pur_date"));
+				OrderItemList.add(ordereditem);
+
+			}
+		} catch (Exception e) {
+			throw new IllegalStateException(e);
+		} finally {
+			if (smt != null) {
+				try {
+					smt.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ignore) {
+				}
+			}
+		}
+		return OrderItemList;
+	}
 
 }

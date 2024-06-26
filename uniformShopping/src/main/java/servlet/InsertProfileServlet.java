@@ -36,6 +36,12 @@ public class InsertProfileServlet extends HttpServlet {
 			UserDAO userDao = new UserDAO();
 
 			//未入力エラー
+			if (login_id.equals("")) {
+				error = "ユーザーIDが未入力の為、会員情報登録処理を行うことができませんでした。";
+				cmd = "insertProfile";
+				return;
+			}
+			
 			if (password.equals("")) {
 				error = "パスワードが未入力の為、会員情報登録処理を行うことができませんでした。";
 				cmd = "insertProfile";

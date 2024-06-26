@@ -1,5 +1,5 @@
 /* ====================================
-      �^�O�ݒ�
+       ^ O ݒ 
    ==================================== */
 * {
 	margin: 0;
@@ -8,7 +8,7 @@
 
 h1,
 h2 {
-	padding: 20px 0;
+	padding: 10px 0;
 }
 
 h4 {
@@ -43,7 +43,7 @@ table {
 
 
 /* ====================================
-      ���ʃN���X�ݒ�
+         ʃN   X ݒ 
    ==================================== */
 .inline-block {
 	display: inline-block;
@@ -51,9 +51,9 @@ table {
 
 
 /* ====================================
-      �y�[�W�S�̐ݒ�
+       y [ W S ̐ݒ 
    ==================================== */
-/* �u���E�U�S�̂̉�ʐݒ� */
+/*  u   E U S ̂̉ ʐݒ  */
 html,
 body {
 	height: 100%;
@@ -68,25 +68,22 @@ body {
 	margin: auto;
 }
 
-.container {
-	width: 850px;
-	margin: 0 auto;
+p {
+	font-weight: bold;
 }
 
-/* �w�b�_�[ */
+/*  w b _ [ */
 header {
-	padding-top: 10px;
-	border-bottom: 5px solid #0000ff;
+
 	text-align: center;
 }
 
-/* ���j���[��� */
+/*    j   [    */
 #menu {
 	position: relative;
-	border-bottom: 2px solid #0000ff;
 }
 
-/* ���C����� */
+/*    C      */
 #main {
 	margin: 0 auto;
 	padding-top: 40px;
@@ -94,20 +91,21 @@ header {
 	text-align: center;
 }
 
-/* �t�b�^�[ */
+/*  t b ^ [ */
 footer {
 	position: absolute;
 	width: 100%;
 	height: 120px;
 	bottom: 0px;
-	border-top: 2px solid #0000ff;
 }
 
-/* �i�r�Q�[�V�����o�[ */
+/*  i r Q [ V     o [ */
 #nav {
 	position: absolute;
-	top: 23px;
+	top: 25px;
 	width: 285px;
+	margin-left: 20%;
+	text-align: center;
 }
 
 #nav li {
@@ -120,6 +118,20 @@ footer {
 	position: absolute;
 	top: 5px;
 	width: 285px;
+	margin-left: 20%;
+	text-align: center;
+	margin-top: 23px
+		/* テキストを左から20%中央に寄せる */
+}
+
+#navList2 {
+	position: absolute;
+	top: 5px;
+	width: 400px;
+	margin-left: 14%;
+	text-align: center;
+	margin-top: 23px
+		/* テキストを左から20%中央に寄せる */
 }
 
 #navList li {
@@ -128,12 +140,15 @@ footer {
 	padding-right: 10px;
 }
 
-/* �y�[�W�^�C�g�� */
+/*  y [ W ^ C g   */
 #page_title {
 	text-align: center;
+	background-color: black;
+	color: white;
+	padding: 10px
 }
 
-/* ���[�U�[��� */
+/*    [ U [    */
 #user_info {
 	position: absolute;
 	width: 200px;
@@ -144,34 +159,35 @@ footer {
 }
 
 /* ====================================
-      �e�[�u���ݒ�
+       e [ u   ݒ 
    ==================================== */
-/*�e�[�u���̐F�ݒ�*/
+/* e [ u   ̐F ݒ */
 table th {
+
 	width: 150px;
-	background-color: #9de2ff;
+	background-color: white;
 }
 
-/* �ꗗ��ʗp�e�[�u���̐ݒ� */
+/*  ꗗ  ʗp e [ u   ̐ݒ  */
 .list-table {
 	width: 100%;
 }
 
-/* �ڍ׏��p�e�[�u���̐ݒ� */
+/*  ڍ׏  p e [ u   ̐ݒ  */
 .detail-table {
 	width: 40%;
 }
 
 .detail-table tr td {
-	background-color: #E0FFFF;
+	background-color: #993300;
 }
 
-/* ���̓t�H�[���p�e�[�u���̐ݒ� */
+/*    ̓t H [   p e [ u   ̐ݒ  */
 .input-table input[type="text"] {
 	width: 100%;
 }
 
-/* ���v���z�p�e�[�u���̐ݒ� */
+/*    v   z p e [ u   ̐ݒ  */
 .total-price-table {
 	width: 300px;
 	margin-right: 100px;
@@ -179,7 +195,7 @@ table th {
 
 
 /* ====================================
-      �{�^���ݒ�
+       { ^   ݒ 
    ==================================== */
 .buy-button {
 	width: 200px;
@@ -188,24 +204,123 @@ table th {
 
 
 /* ====================================
-      ���j���[��ʐݒ�
+         j   [  ʐݒ 
    ==================================== */
-/* ���j���[�����N�̐ݒ� */
+/*    j   [     N ̐ݒ  */
 .link li {
 	margin-bottom: 20px;
 }
 
 
 /* ====================================
-      �G���[��ʐݒ�
+       G   [  ʐݒ 
    ==================================== */
-/* �G���[���b�Z�[�W�̐ݒ� */
+/*  G   [   b Z [ W ̐ݒ  */
 .error-msg {
 	text-align: center;
 }
 
-/* �G���[��ʃ����N�̐ݒ� */
+/*  G   [  ʃ    N ̐ݒ  */
 .back-link {
 	margin-top: 100px;
 	text-align: center;
+}
+
+a {
+	color: white;
+	/* 通常のリンクの色 */
+	text-decoration: none;
+	/* 下線を消す（必要に応じて） */
+}
+
+a:hover {
+	color: red;
+	/* カーソルを合わせたときの色 */
+}
+
+
+/* ボタンの基本スタイル */
+.botan {
+	color: #fff;
+	/* テキストの色を白に設定 */
+	border-bottom: 5px solid black;
+	/* 下部に5pxの黒いボーダーを設定 */
+	background: black;
+	/* 背景色をオレンジ色に設定 */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	/* 中央揃え */
+	padding: 10px 20px;
+	/* 内側の余白を上下10px、左右20pxに設定 */
+	text-decoration: none;
+	/* テキストの装飾（下線）を削除 */
+	font-size: 16px;
+	/* フォントサイズを16pxに設定 */
+	transition: margin-top 0.3s, background 0.3s, border-bottom 0.3s;
+	/* ホバー時の変化をスムーズにする */
+	cursor: pointer;
+	/* マウスオーバー時のカーソルをポインターにする */
+	border: none;
+	/* デフォルトのボーダーを削除 */
+	border-radius: 3px;
+	/* 角を少し丸める */
+	margin: 0 auto;
+	/* 水平方向に中央揃え */
+}
+
+
+/* ホバー時のスタイル */
+.botan:hover {
+	margin-top: 2px;
+	/* ボタンを3px上に移動 */
+	background: #999999;
+	/* 背景色を黒に変更 */
+}
+
+
+/* ボタンの基本スタイル */
+.btn-tag {
+	color: #fff;
+	/* テキストの色を白に設定 */
+	border-bottom: 5px solid black;
+	/* 下部に5pxの黒いボーダーを設定 */
+	background: #FFA500;
+	/* 背景色をオレンジ色に設定 */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	/* 中央揃え */
+	padding: 10px 20px;
+	/* 内側の余白を上下10px、左右20pxに設定 */
+	text-decoration: none;
+	/* テキストの装飾（下線）を削除 */
+	font-size: 16px;
+	/* フォントサイズを16pxに設定 */
+	transition: margin-top 0.3s, background 0.3s, border-bottom 0.3s;
+	/* ホバー時の変化をスムーズにする */
+	cursor: pointer;
+	/* マウスオーバー時のカーソルをポインターにする */
+	border: none;
+	/* デフォルトのボーダーを削除 */
+	border-radius: 3px;
+	/* 角を少し丸める */
+}
+
+/* ホバー時のスタイル */
+.btn-tag:hover {
+	margin-top: 3px;
+	/* ボタンを3px上に移動 */
+	border-bottom: 2px solid black;
+	/* 下部のボーダーを2pxに変更 */
+	background: #CC6600;
+	/* 背景色を黒に変更 */
+}
+
+/* アイコンのスタイル */
+.cart-icon {
+	width: 20px;
+	height: 20px;
+	margin-right: 10px;
+	/* アイコンとテキストの間に余白を追加 */
 }

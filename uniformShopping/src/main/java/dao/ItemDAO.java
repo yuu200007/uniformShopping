@@ -14,7 +14,7 @@ public class ItemDAO {
 	private static String RDB_DRIVE = "org.mariadb.jdbc.Driver";
 	private static String URL = "jdbc:mariadb://localhost/uniformdb";
 	private static String USER = "root";
-	private static String PASS = "root123";
+	private static String PASS = "";
 
 	private static Connection getConnection() {
 		try {

@@ -15,7 +15,7 @@ public class OrderDAO {
 	private static String RDB_DRIVE = "org.mariadb.jdbc.Driver";
 	private static String URL = "jdbc:mariadb://localhost/uniformdb";
 	private static String USER = "root";
-	private static String PASS = "root123";
+	private static String PASS = "";
 
 	private static Connection getConnection() {
 		try {
@@ -39,8 +39,8 @@ public class OrderDAO {
 				+ order.getItem_id() + ","
 				+ order.getQuantity() + ","
 				+ order.getPay_status() + ","
-				+ order.getDeli_status() 
-				+ ", NOW())";		
+				+ order.getDeli_status()
+				+ ", NOW())";
 		try {
 			con = getConnection();
 			smt = con.createStatement();
