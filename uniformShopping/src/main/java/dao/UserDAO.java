@@ -27,7 +27,7 @@ public class UserDAO {
     /**
      * データベースのパスワード
      */
-    private static final String PASSWD = "";
+    private static final String PASSWD = "root123";
 
     /**
      * フィールド変数のデータベース情報を基に、DB接続をおこなう
