@@ -38,32 +38,36 @@ String cmd = (String) request.getAttribute("cmd");
 				switch (cmd) {
 				case "list":
 				%>
-				<a href="<%=request.getContextPath()%>/list">【商品一覧画面へ戻る】</a>
+				<a href="<%=request.getContextPath()%>/list" class="custom-link">商品一覧画面へ戻る</a>
 				<%
 				break;
 				case "orderedList":
 				%>
-				<a href="<%=request.getContextPath()%>/orderedList">【受注一覧画面へ戻る】</a>
+				<a href="<%=request.getContextPath()%>/orderedList"
+					class="custom-link">受注一覧画面へ戻る</a>
 				<%
 				break;
 				case "login":
 				%>
-				<a href="<%=request.getContextPath()%>/logout">【ログイン画面へ戻る】</a>
+				<a href="<%=request.getContextPath()%>/logout" class="custom-link">ログイン画面へ戻る</a>
 				<%
 				break;
 				case "insertProfile":
 				%>
-				<a href="<%=request.getContextPath()%>/view/insertProfile.jsp">【会員登録画面へ戻る】</a>
+				<a href="<%=request.getContextPath()%>/view/insertProfile.jsp"
+					class="custom-link">会員登録画面へ戻る</a>
 				<%
 				break;
 				case "orderConfirm":
 				%>
-				<a href="<%=request.getContextPath()%>/view/orderConfirm.jsp">【注文内容確認画面へ戻る】</a>
+				<a href="<%=request.getContextPath()%>/view/orderConfirm.jsp"
+					class="custom-link">注文内容確認画面へ戻る</a>
 				<%
 				break;
 				case "insert":
 				%>
-				<a href="<%=request.getContextPath()%>/view/insert.jsp">【商品登録画面へ戻る】</a>
+				<a href="<%=request.getContextPath()%>/view/insert.jsp"
+					class="custom-link">商品登録画面へ戻る</a>
 				<%
 				break;
 				}

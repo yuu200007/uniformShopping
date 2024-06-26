@@ -27,9 +27,9 @@ MyFormat format = new MyFormat();
 			<div class="container">
 				<!-- ナビゲーション  -->
 				<div id="nav">
-					<ul>
-						<li><a href="<%=request.getContextPath()%>/list">[商品一覧]</a></li>
-					</ul>
+					<p class="bold">
+						<a href="<%=request.getContextPath()%>/list">商品一覧</a>
+					</p>
 				</div>
 
 				<!-- ページタイトル -->

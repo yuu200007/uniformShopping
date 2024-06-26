@@ -29,33 +29,50 @@ MyFormat MyFormatObj = new MyFormat();
 			<div class="container">
 				<!-- ナビゲーション  -->
 				<div id="navList">
-					<ul>
-						<%
-						if (user.getLogin_id().equals("user0")) {
-						%>
-						<li><a href="<%=request.getContextPath()%>/view/login.jsp">[ログイン]</a></li>
-						<li><a
-							href="<%=request.getContextPath()%>/view/insertProfile.jsp">[会員登録]</a></li>
-						<li><a href="<%=request.getContextPath()%>/view/showCart.jsp">[カート確認]</a></li>
+
+					<%
+					if (user.getLogin_id().equals("user0")) {
+					%>
+					
+							<p class="bold">
+								<a href="<%=request.getContextPath()%>/view/login.jsp">ログイン</a>
+								&nbsp; &nbsp; <a
+									href="<%=request.getContextPath()%>/view/insertProfile.jsp">会員登録</a>
+								&nbsp; &nbsp; <a
+									href="<%=request.getContextPath()%>/view/showCart.jsp">カート確認</a>
+							</p>
+						
 						<%
 						} else if ((user != null) && (user.getAuthority() == 1)) {
 						%>
-						<li><a href="<%=request.getContextPath()%>/logout">[ログアウト]</a></li>
-						<li><a href="<%=request.getContextPath()%>/orderedList">[受注状況一覧]</a></li>
-						<li><a href="<%=request.getContextPath()%>/view/insert.jsp">[商品登録]</a></li>
+						
+								<p class="bold">
+									<a href="<%=request.getContextPath()%>/logout">ログアウト</a> &nbsp;
+									&nbsp; <a href="<%=request.getContextPath()%>/orderedList">受注状況一覧</a>
+									&nbsp; &nbsp; <a
+										href="<%=request.getContextPath()%>/view/insert.jsp">商品登録</a>
+								</p>
+							
 						<%
 						} else {
 						%>
-						<li><a href="<%=request.getContextPath()%>/logout">[ログアウト]</a></li>
-						<li><a
-							href="<%=request.getContextPath()%>/view/changeProfile.jsp">[会員情報変更]</a></li>
-						<li><a
-							href="<%=request.getContextPath()%>/showHistoryOrderedItem">[注文履歴]</a></li>
-						<li><a href="<%=request.getContextPath()%>/view/showCart.jsp">[カート確認]</a></li>
+						
+								<p class="bold">
+
+									<a href="<%=request.getContextPath()%>/logout">ログアウト</a> &nbsp;
+									&nbsp; <a
+										href="<%=request.getContextPath()%>/view/changeProfile.jsp">会員情報変更</a>
+									&nbsp; &nbsp; <a
+										href="<%=request.getContextPath()%>/showHistoryOrderedItem">注文履歴</a>
+									&nbsp; &nbsp; <a
+										href="<%=request.getContextPath()%>/view/showCart.jsp">カート確認</a>
+								</p>
+
 						<%
 						}
 						%>
-					</ul>
+						</tr>
+					</table>
 				</div>
 
 				<!-- ページタイトル -->
@@ -107,17 +124,20 @@ MyFormat MyFormatObj = new MyFormat();
 						%>
 						<td>
 							<form method="post" enctype="multipart/form-data" name="update"
-								action="<%=request.getContextPath()%>/update">
+								action="<%=request.getContextPath()%>/update"
+								class="inline-form">
 								<input type="hidden" name="item_id"
 									value=<%=itemList.get(i).getItemId()%>> <input
 									type="hidden" name="cmd" value="update_view"> <input
-									type="submit" value="変更">
+									type="submit" value="変更" class="botan">
 							</form>
+
 							<form method="post" name="delete"
-								action="<%=request.getContextPath()%>/delete">
+								action="<%=request.getContextPath()%>/delete"
+								class="inline-form">
 								<input type="hidden" name="item_id"
 									value=<%=itemList.get(i).getItemId()%>> <input
-									type="submit" value="削除">
+									type="submit" value="削除" class="botan">
 							</form> </a>
 						</td>
 						<%
@@ -127,7 +147,11 @@ MyFormat MyFormatObj = new MyFormat();
 							action="<%=request.getContextPath()%>/insertIntoCart">
 							<td class="intocart"><input type="text" name="quantity">
 								<input type="hidden" value=<%=itemList.get(i).getItemId()%>
-								name="item_id"> <input type="submit" value="カートに入れる">
+								name="item_id"></td>
+							<td>
+								<button class="btn-tag">
+									<img src="../img/カート.png" alt="カート" class="cart-icon">カートに入れる
+								</button>
 							</td>
 						</form>
 						<%

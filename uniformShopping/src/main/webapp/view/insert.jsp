@@ -20,11 +20,10 @@
 			<div class="container">
 				<!-- ナビゲーション  -->
 				<div id="nav">
-					<ul>
-						<li><a
-							href="<%=request.getContextPath()%>/orderedList">[受注状況一覧]</a></li>
-						<li><a href="<%=request.getContextPath()%>/list">[商品一覧]</a></li>
-					</ul>
+					<p class="bold">
+						<a href="<%=request.getContextPath()%>/orderedList">受注状況一覧</a>
+						&nbsp; &nbsp; <a href="<%=request.getContextPath()%>/list">商品一覧</a></
+					</p>
 				</div>
 
 				<!-- ページタイトル -->
@@ -38,7 +37,8 @@
 		<div id="main" class="container">
 
 			<!--  入力フォーム -->
-			<form  method="post" enctype="multipart/form-data" action="<%=request.getContextPath()%>/insert">
+			<form method="post" enctype="multipart/form-data"
+				action="<%=request.getContextPath()%>/insert">
 				<table class="input-table" align="center">
 					<tr>
 						<th>商品名</th>
@@ -57,7 +57,7 @@
 						<td><input type="file" name="image"></td>
 					</tr>
 				</table>
-				<input type="submit" value="登録">
+				<input type="submit" value="登録" class="botan">
 			</form>
 		</div>
 

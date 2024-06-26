@@ -222,8 +222,15 @@ table th {
 
 /*  G   [  ʃ    N ̐ݒ  */
 .back-link {
-	margin-top: 100px;
+	margin-top: 50px;
 	text-align: center;
+	text-decoration: underline;
+	/* 下線を引く */
+}
+
+.back-link:hover {
+	color: red;
+	/* カーソルを合わせたときの色 */
 }
 
 a {
@@ -237,6 +244,20 @@ a:hover {
 	color: red;
 	/* カーソルを合わせたときの色 */
 }
+
+
+.custom-link {
+	color: black;
+	/* 通常のリンクの色 */
+	text-decoration: none;
+	/* 下線を消す（必要に応じて） */
+}
+
+.custom-link:hover {
+	color: red;
+	/* カーソルを合わせたときの色 */
+}
+
 
 
 /* ボタンの基本スタイル */
@@ -272,11 +293,18 @@ a:hover {
 
 /* ホバー時のスタイル */
 .botan:hover {
-	margin-top: 2px;
-	/* ボタンを3px上に移動 */
 	background: #999999;
 	/* 背景色を黒に変更 */
 }
+
+
+.inline-form {
+	display: inline-block;
+	margin: 0;
+	margin: 0 20px;
+	/* ボタン間のスペースを広げる */
+}
+
 
 
 /* ボタンの基本スタイル */
