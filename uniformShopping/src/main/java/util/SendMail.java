@@ -32,7 +32,7 @@ public class SendMail {
 			item_name = order_list.get(i).getItem_name();
 			price = order_list.get(i).getPrice();
 			quantity = order_list.get(i).getQuantity();
-			booktext += item_name + "  " + price + "円" + quantity + "個\n";
+			booktext += item_name + "  " + price + "円" + quantity + "点\n";
 		}
 		
 		//本文

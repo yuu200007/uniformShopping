@@ -3,8 +3,6 @@ package servlet;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
@@ -49,7 +47,7 @@ public class UpdateServlet extends HttpServlet {
 				cmd = "list";
 				return;
 			}
-			
+
 			//商品詳細・更新画面に遷移する場合finallyに移る
 			if (cmd.equals("update_view")) {
 				request.setAttribute("item_info", oldItem);
@@ -60,7 +58,6 @@ public class UpdateServlet extends HttpServlet {
 			String price = request.getParameter("price");
 			String stock = request.getParameter("stock");
 			Part filePart = request.getPart("image");
-
 
 			//商品名未入力エラー
 			if (itemName.equals("")) {
@@ -86,6 +83,16 @@ public class UpdateServlet extends HttpServlet {
 			//価格値不正エラー
 			if (Integer.parseInt(price) < 0) {
 				error = "価格が不正のため、商品更新処理は行えませんでした。";
+				cmd = "list";
+				request.setAttribute("error", error);
+				request.setAttribute("cmd", cmd);
+				request.getRequestDispatcher("/view/error.jsp").forward(request, response);
+				return;
+			}
+
+			//価格値不正エラー
+			if (Integer.parseInt(stock) <= 0) {
+				error = "在庫数が不正のため、商品更新処理は行えませんでした。";
 				cmd = "list";
 				request.setAttribute("error", error);
 				request.setAttribute("cmd", cmd);
@@ -151,11 +158,6 @@ public class UpdateServlet extends HttpServlet {
 		} catch (Exception e) { //DB未接続エラー
 			error = "DB接続エラーの為、商品更新処理は行えませんでした。";
 			cmd = "orderedList";
-			StringWriter sw = new StringWriter();
-			PrintWriter pw = new PrintWriter(sw);
-			e.printStackTrace(pw);
-			pw.flush();
-			error = sw.toString();
 
 		} finally { //遷移先の指定
 			if ((error == null) && (cmd.equals("update_view"))) {

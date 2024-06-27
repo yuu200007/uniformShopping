@@ -25,7 +25,6 @@ body {
 
 img {
 	vertical-align: middle; /* 画像の位置をテキストの中央に */
-	 height: 50px; /* 適切な高さを設定 */
 }
 
 .content {
@@ -40,8 +39,9 @@ img {
 <header>
 	<div class="b">
 		<h1>
-			<font face="impact">KANDA UNIFORM</font> <img src="<%=request.getContextPath()%>/img/ロゴ.png"
-				alt="ロゴ" width="100" height="200">
+			<font face="impact">KANDA UNIFORM</font> <img
+				src="<%=request.getContextPath()%>/img/ロゴ.png" alt="ロゴ" width="80"
+				height="80">
 		</h1>
 	</div>
 </header>

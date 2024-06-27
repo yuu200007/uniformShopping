@@ -3,7 +3,7 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@page import="java.util.*,bean.*,dao.*,util.*"%>
 <%
-ArrayList<OrderItem> orderItemList = (ArrayList<OrderItem>)request.getAttribute("orderItemList");
+ArrayList<OrderItem> orderItemList = (ArrayList<OrderItem>) request.getAttribute("orderItemList");
 MyFormat mf = new MyFormat();
 %>
 <html>
@@ -23,10 +23,10 @@ MyFormat mf = new MyFormat();
 		<div id="menu">
 			<div class="container">
 				<!-- ナビゲーション  -->
-				<div id="nav">
-					<ul>
-						<li><a href="<%=request.getContextPath()%>/list">[商品一覧]</a></li>
-					</ul>
+				<div id="navList">
+					<p class="bold">
+						<a href="<%=request.getContextPath()%>/list">商品一覧</a>
+					</p>
 				</div>
 
 				<!-- ページタイトル -->
@@ -47,23 +47,23 @@ MyFormat mf = new MyFormat();
 					<th>注文日</th>
 				</tr>
 
-					<%
-					if (orderItemList != null) {
-						for (int i = 0; i<orderItemList.size(); i++) {
-						int total = 0;	
-						total = ((orderItemList.get(i).getPrice())*(orderItemList.get(i).getQuantity()));
-					%>
-							<tr>
-								<td><%=orderItemList.get(i).getItem_name()%></td>
-								<td><%=mf.moneyFormat(orderItemList.get(i).getPrice())%></td>
-								<td><%=orderItemList.get(i).getQuantity()%></td>
-								<td><%=mf.moneyFormat(total)%></td>
-								<td><%=orderItemList.get(i).getPur_date().replace("-","/") %></td>
-							</tr>
-					<%
-						}
-					}
-					%>
+				<%
+				if (orderItemList != null) {
+					for (int i = 0; i < orderItemList.size(); i++) {
+						int total = 0;
+						total = ((orderItemList.get(i).getPrice()) * (orderItemList.get(i).getQuantity()));
+				%>
+				<tr>
+					<td><%=orderItemList.get(i).getItem_name()%></td>
+					<td><%=mf.moneyFormat(orderItemList.get(i).getPrice())%></td>
+					<td><%=orderItemList.get(i).getQuantity()%></td>
+					<td><%=mf.moneyFormat(total)%></td>
+					<td><%=orderItemList.get(i).getPur_date().replace("-", "/")%></td>
+				</tr>
+				<%
+				}
+				}
+				%>
 			</table>
 		</div>
 

@@ -1,9 +1,9 @@
 <%@page contentType="text/html; charset=UTF-8"%>
-<%@page import="bean.Item" %>
-<%@page import="util.MyFormat" %>
+<%@page import="bean.Item"%>
+<%@page import="util.MyFormat"%>
 
 <%
-Item item = (Item)request.getAttribute("item_info");
+Item item = (Item) request.getAttribute("item_info");
 MyFormat MyFormatObj = new MyFormat();
 %>
 
@@ -25,11 +25,11 @@ MyFormat MyFormatObj = new MyFormat();
 		<div id="menu">
 			<div class="container">
 				<!-- ナビゲーション  -->
-				<div id="nav">
-					<ul>
-						<li><a href="<%=request.getContextPath()%>/list">[商品一覧]</a></li>
-						<li><a href="<%=request.getContextPath()%>/view/insert.jsp">[商品登録]</a></li>
-					</ul>
+				<div id="navList">
+					<p class="bold">
+						<a href="<%=request.getContextPath()%>/list">商品一覧</a> &nbsp;
+						&nbsp; <a href="<%=request.getContextPath()%>/view/insert.jsp">商品登録</a>
+					</p>
 				</div>
 
 				<!-- ページタイトル -->
@@ -43,7 +43,8 @@ MyFormat MyFormatObj = new MyFormat();
 		<div id="main" class="container">
 
 			<!-- 変更画面 -->
-			<form  method="post" enctype="multipart/form-data" action="<%=request.getContextPath()%>/update">
+			<form method="post" enctype="multipart/form-data"
+				action="<%=request.getContextPath()%>/update">
 				<table class="input-table">
 					<thead>
 						<tr>
@@ -55,29 +56,31 @@ MyFormat MyFormatObj = new MyFormat();
 					<tbody>
 						<tr>
 							<th>商品名</th>
-							<td><%=item.getItemName() %></td>
+							<td><%=item.getItemName()%></td>
 							<td><input type="text" name="item_name"></td>
 						</tr>
 						<tr>
 							<th>価格</th>
-							<td><%=item.getPrice() %></td>
+							<td><%=item.getPrice()%></td>
 							<td><input type="text" name="price"></td>
 						</tr>
 						<tr>
 							<th>在庫数</th>
-							<td><%=item.getStock() %></td>
+							<td><%=item.getStock()%></td>
 							<td><input type="text" name="stock"></td>
 						</tr>
 						<tr>
 							<th>商品画像</th>
-							<td><img src="<%= request.getContextPath() %>/img/<%= item.getImage() %>" alt="<%= item.getItemName() %>の画像"></td>
+							<td><img
+								src="<%=request.getContextPath()%>/img/<%=item.getImage()%>"
+								alt="<%=item.getItemName()%>の画像"></td>
 							<td><input type="file" name="image"></td>
 						</tr>
 					</tbody>
 				</table>
-				<input type="hidden" name="item_id" value="<%= item.getItemId() %>">
-				<input type="hidden" name="cmd" value="update">
-				<input type="submit" value="変更完了">
+				<input type="hidden" name="item_id" value="<%=item.getItemId()%>">
+				<input type="hidden" name="cmd" value="update"> <input
+					type="submit" value="変更完了" class="botan">
 			</form>
 		</div>
 

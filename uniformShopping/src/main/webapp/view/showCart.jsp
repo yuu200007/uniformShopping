@@ -1,7 +1,7 @@
 <%@page contentType="text/html; charset=UTF-8"%>
-<%@page import="java.util.*,bean.Order,util.MyFormat" %>
+<%@page import="java.util.*,bean.Order,util.MyFormat"%>
 <%
-ArrayList<Order> order_list = (ArrayList<Order>)session.getAttribute("order_list");
+ArrayList<Order> order_list = (ArrayList<Order>) session.getAttribute("order_list");
 MyFormat mf = new MyFormat();
 %>
 <html>
@@ -22,10 +22,10 @@ MyFormat mf = new MyFormat();
 		<div id="menu">
 			<div class="container">
 				<!-- ナビゲーション  -->
-				<div id="nav">
-					<ul>
-						<li><a href="<%=request.getContextPath()%>/list">[商品一覧]</a></li>
-					</ul>
+				<div id="navList">
+					<p class="bold">
+						<a href="<%=request.getContextPath()%>/list">商品一覧</a>
+					</p>
 				</div>
 
 				<!-- ページタイトル -->
@@ -37,7 +37,7 @@ MyFormat mf = new MyFormat();
 
 		<!-- 商品一覧のコンテンツ部分 -->
 		<div id="main" class="container">
-			<table class="list-table">
+			<table class="list-table2">
 				<tr>
 					<th>商品名</th>
 					<th>単価</th>
@@ -53,11 +53,13 @@ MyFormat mf = new MyFormat();
 					<td style="text-align: center"><%=order_list.get(i).getItem_name()%></td>
 					<td style="text-align: center"><%=mf.moneyFormat(order_list.get(i).getPrice())%></td>
 					<td style="text-align: center"><%=order_list.get(i).getQuantity()%></td>
-					<td style="text-align: center"><a href="<%=request.getContextPath()%>/insertIntoCart?delno=<%=i%>">削除</a></td>
+					<td style="text-align: center"><a
+						href="<%=request.getContextPath()%>/insertIntoCart?delno=<%=i%>"
+						class="custom-link">削除</a></td>
 				</tr>
 				<%
-					total += ((order_list.get(i).getPrice())*(order_list.get(i).getQuantity()));
-					}
+				total += ((order_list.get(i).getPrice()) * (order_list.get(i).getQuantity()));
+				}
 				}
 				%>
 			</table>
@@ -65,19 +67,26 @@ MyFormat mf = new MyFormat();
 			<table class="total-price-table">
 				<tr>
 					<th>合計</th>
-					<td><%= mf.moneyFormat(total) %></td>
+					<td><%=mf.moneyFormat(total)%></td>
 				</tr>
 			</table>
-			<% if (order_list != null) { %>
-			<form action="<%=request.getContextPath()%>/view/orderConfirm.jsp" class="buy-button">
-				<input type="submit" value="注文内容確認">
-			</form>
-			<%} %>
+			<%
+			if (order_list != null) {
+			%>
+			<div style="margin-top: 40px">
+				<form action="<%=request.getContextPath()%>/view/orderConfirm.jsp">
+					<input type="submit" value="注文内容確認" class="botan">
+				</form>
+			</div>
+			<%
+			}
+			%>
 		</div>
-	</div>
 
-	<!-- フッター部分 -->
-	<%@ include file="/common/footer.jsp"%>
+
+		<!-- フッター部分 -->
+		<%@ include file="/common/footer.jsp"%>
+
 	</div>
 </body>
 </html>

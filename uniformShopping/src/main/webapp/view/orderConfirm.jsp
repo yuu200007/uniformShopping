@@ -1,74 +1,75 @@
 <%-- 注文情報入力＆購入内容確認画面 --%>
 
 <%@page contentType="text/html; charset=UTF-8"%>
-<%@page import="java.util.*,bean.*,dao.*,util.*" %>
+<%@page import="java.util.*,bean.*,dao.*,util.*"%>
 <%@page import="java.util.ArrayList"%>
 <%
 MyFormat format = new MyFormat();
 %>
 <html>
-	<head>
-		<title>購入内容確認画面</title>
-		<link rel="stylesheet" href="<%=request.getContextPath() %>/css/style.css">
-	</head>
-	<body>
-		<!-- ブラウザ全体 -->
-		<div id="wrap">
+<head>
+<title>購入内容確認画面</title>
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/style.css">
+</head>
+<body>
+	<!-- ブラウザ全体 -->
+	<div id="wrap">
 
-			<!--ヘッダー部分  -->
-			<%@ include file="/common/header.jsp" %>
-			<%@ include file="/common/userInfo.jsp"%>
+		<!--ヘッダー部分  -->
+		<%@ include file="/common/header.jsp"%>
+		<%@ include file="/common/userInfo.jsp"%>
 
-			<!-- メニュー部分 -->
-			<div id="menu">
-				<div class="container">
-					<!-- ナビゲーション  -->
-					<div id="nav">
-						<ul>
-							<li><a href ="<%=request.getContextPath()%>/list">[商品一覧]</a></li>
-						</ul>
-					</div>
+		<!-- メニュー部分 -->
+		<div id="menu">
+			<div class="container">
+				<!-- ナビゲーション  -->
+				<div id="navList">
+					<p class="bold">
+						<a href="<%=request.getContextPath()%>/list">商品一覧</a>
+					</p>
+				</div>
 
-					<!-- ページタイトル -->
-					<div id="page_title">
-						<h2>購入内容確認</h2>
-					</div>
+				<!-- ページタイトル -->
+				<div id="page_title">
+					<h2>購入内容確認</h2>
 				</div>
 			</div>
+		</div>
 
-			<!-- 一覧のコンテンツ部分 -->
-			<div id="main" class="container">
+		<!-- 一覧のコンテンツ部分 -->
+		<div id="main" class="container">
 			<form action="<%=request.getContextPath()%>/orderConfirm">
-			
-			<%
-			//会員だった場合
-			if(user.getAuthority()==2){
-			%>
+
+				<%
+				//会員だった場合
+				if (user.getAuthority() == 2) {
+				%>
 				<!--  入力フォーム -->
-					<table class="input-table" align="center">
+				<table class="input-table" align="center">
 					<tr>
 						<th>氏名</th>
-						<td><%=user.getName() %></td>
+						<td><%=user.getName()%></td>
 					</tr>
 					<tr>
 						<th>メールアドレス</th>
-						<td><%=user.getEmail() %></td>
+						<td><%=user.getEmail()%></td>
 					</tr>
 					<tr>
 						<th>住所</th>
-						<td><%=user.getAddress() %></td>
+						<td><%=user.getAddress()%></td>
 					</tr>
 					<tr>
 						<th>備考欄</th>
 						<td><textarea name="remarks" rows="3" cols="45"></textarea></td>
 					</tr>
-					</table>
-			<%
-			//非会員だった場合
-			}else{
-			%>
-			<!--  入力フォーム -->
-					<table class="input-table" align="center">
+				</table>
+				<%
+				//非会員だった場合
+				} else {
+				%>
+				<!--  入力フォーム -->
+				<table class="input-table" align="center">
 					<tr>
 						<th>氏名</th>
 						<td><input type="text" name="name"></td>
@@ -85,55 +86,58 @@ MyFormat format = new MyFormat();
 						<th>備考欄</th>
 						<td><textarea name="remarks" rows="3" cols="45"></textarea></td>
 					</tr>
-					</table>
-			<%
-			}
-			%>
+				</table>
+				<%
+				}
+				%>
 				<!-- 注文一覧表示 -->
-				<table class="list-table">
+				<table class="list-table2">
 					<tr>
 						<th>商品名</th>
 						<th>単価</th>
 						<th>個数</th>
 					</tr>
-					
+
 					<%
 					//合計金額
 					int total = 0;
-					
+
 					//スコープデータを表示する
-					ArrayList<Order> order_list = (ArrayList<Order>)session.getAttribute("order_list");
-					
-					for(int i=0; i<order_list.size(); i++){
+					ArrayList<Order> order_list = (ArrayList<Order>) session.getAttribute("order_list");
+
+					for (int i = 0; i < order_list.size(); i++) {
 						Order order = order_list.get(i);
-						total += order.getPrice()*order.getQuantity();
+						total += order.getPrice() * order.getQuantity();
 					%>
-					
+
 					<tr>
-						<td><%=order.getItem_name() %></td>
-						<td><%=format.moneyFormat(order.getPrice()) %></td>
-						<td><%=order.getQuantity() %></td>
+						<td><%=order.getItem_name()%></td>
+						<td><%=format.moneyFormat(order.getPrice())%></td>
+						<td><%=order.getQuantity()%></td>
 					</tr>
 					<%
 					}
 					%>
 				</table>
 
-				<hr/>
-				<table class="total-price-table" >
+				<hr />
+				<table class="total-price-table">
 					<tr>
 						<th>合計</th>
-						<td><%=format.moneyFormat(total) %></td>
+						<td><%=format.moneyFormat(total)%></td>
 					</tr>
 				</table>
 
-					<input type="submit" value=" 購入 ">
-				</form>
+				<div style="margin-top: 40px">
+					<input type="submit" value=" 購入 " class="botan">
+				</div>
 
-			</div>
+			</form>
 
-			<!-- フッター部分 -->
-			<%@ include file="/common/footer.jsp" %>
 		</div>
-	</body>
+
+		<!-- フッター部分 -->
+		<%@ include file="/common/footer.jsp"%>
+	</div>
+</body>
 </html>

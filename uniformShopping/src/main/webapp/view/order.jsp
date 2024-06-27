@@ -20,10 +20,10 @@
 		<div id="menu">
 			<div class="container">
 				<!-- ナビゲーション  -->
-				<div id="nav">
-					<ul>
-						<li><a href="<%=request.getContextPath()%>/view/list.jsp">[商品一覧]</a></li>
-					</ul>
+				<div id="navList">
+					<p class="bold">
+						<a href="<%=request.getContextPath()%>/view/list.jsp">商品一覧</a>
+					</p>
 				</div>
 
 				<!-- ページタイトル -->
@@ -57,7 +57,7 @@
 					</tr>
 				</table>
 
-				<input type="submit" value="注文内容確認へ">
+				<input type="submit" value="注文内容確認へ" class="botan">
 			</form>
 
 		</div>

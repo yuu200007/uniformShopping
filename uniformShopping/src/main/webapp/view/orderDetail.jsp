@@ -27,11 +27,11 @@ User buyer = (User) request.getAttribute("buyer");
 		<div id="menu">
 			<div class="container">
 				<!-- ナビゲーション  -->
-				<div id="nav">
-					<ul>
-						<li><a href="<%=request.getContextPath()%>/orderedList">[受注状況一覧]</a></li>
-						<li><a href="<%=request.getContextPath()%>/list">[商品一覧]</a></li>
-					</ul>
+				<div id="navList">
+					<p class="bold">
+						<a href="<%=request.getContextPath()%>/orderedList">受注状況一覧</a>
+						&nbsp; &nbsp; <a href="<%=request.getContextPath()%>/list">商品一覧</a>
+					</p>
 				</div>
 
 				<!-- ページタイトル -->
@@ -63,6 +63,10 @@ User buyer = (User) request.getAttribute("buyer");
 					<tr>
 						<th>メールアドレス</th>
 						<td><%=buyer.getEmail()%></td>
+					</tr>
+					<tr>
+						<th>備考</th>
+						<td>&nbsp;</td>
 					</tr>
 					<tr>
 						<th>発注日</th>
@@ -125,11 +129,18 @@ User buyer = (User) request.getAttribute("buyer");
 						</select></td>
 					</tr>
 					<tr>
-						<td colspan=2><input type="submit" value="状況更新"> <input
-							type="hidden" name="buyer"
-							value="<%=orderedList.get(0).getBuyer()%>"> <input
-							type="hidden" name="purDate"
-							value="<%=orderedList.get(0).getPur_date()%>"></td>
+
+						<td colspan=2>
+
+							<div style="margin-top: 40px">
+
+								<input type="submit" value="状況更新" class="botan"> <input
+									type="hidden" name="buyer"
+									value="<%=orderedList.get(0).getBuyer()%>"> <input
+									type="hidden" name="purDate"
+									value="<%=orderedList.get(0).getPur_date()%>">
+							</div>
+						</td>
 					</tr>
 				</table>
 			</form>

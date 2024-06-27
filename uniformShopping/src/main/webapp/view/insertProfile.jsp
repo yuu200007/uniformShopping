@@ -18,7 +18,7 @@
 		<div id="menu">
 			<div class="container">
 				<!-- ナビゲーション  -->
-				<div id="nav">
+				<div id="navList">
 					<p class="bold">
 						<a href="<%=request.getContextPath()%>/list">商品一覧</a>
 					</p>
